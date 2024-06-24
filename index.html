@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Petshop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Reset CSS */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Corpo da página */
+    body {
+      font-family: Arial, sans-serif; /* Define a fonte para o corpo do documento */
+      margin-bottom: 100px; /* Espaço inferior para o footer fixo */
+    }
+
+    .header {
+      background-color: #282828; /* Cor de fundo do header */
+      padding: 10px 5px; /* Ajustando o padding para corresponder ao espaçamento */
+      display: flex; /* Usa flexbox para alinhar itens horizontalmente */
+      justify-content: space-between; /* Espaço entre os elementos */
+      align-items: center; /* Alinha os itens verticalmente ao centro */
+    }
+
+    .header > div,
+    .header .input-group {
+      flex: 1; /* Todos os filhos diretos do header terão flexibilidade igual */
+      display: flex;
+      justify-content: center; /* Centraliza o conteúdo de cada bloco */
+      gap: 16px;
+    }
+
+    .header > div:first-child,
+    .header > div:last-child {
+      justify-content: flex-start; /* Alinha o ícone à esquerda */
+      flex-grow: 0; /* Não permite que o ícone e o avatar cresçam */
+    }
+
+    .header > div:last-child {
+      justify-content: flex-end; /* Alinha o avatar à direita */
+    }
+
+    /* Estilização do input e botão */
+    .input-group .form-control {
+      width: 384px;
+      height: 42px;
+      padding: 0px 8px;
+      border: 0;
+      box-sizing: border-box;
+      border-radius: 24px;
+      background-color: #393939;
+      color: #c1c1c1;
+      font-size: 16px;
+      font-family: "Source Sans Pro";
+      font-weight: 400;
+      line-height: 19px;
+      outline: none;
+    }
+
+    .input-group .btn {
+      width: 84px;
+      height: 40px;
+      padding: 0px 8px;
+      border: 0;
+      box-sizing: border-box;
+      border-radius: 24px;
+      background-color: #fb212c;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: "Source Sans Pro";
+      font-weight: 400;
+      line-height: 19px;
+      outline: none;
+    }
+
+    .input-group .btn:hover {
+      background-color: #c81d24; /* Cor de hover mais escura */
+    }
+
+    .footer {
+      position: fixed; /* Alterado para 'fixed' */
+      bottom: 0;
+      left: 0;
+      width: 100%; /* Assume a largura total da tela */
+      height: 64px; /* Altura fixa */
+      background-color: #282828; /* Cor de fundo */
+      display: flex;
+      justify-content: space-around; /* Espalha os ícones uniformemente */
+      align-items: center; /* Centraliza verticalmente */
+    }
+
+    .footer-link img {
+      height: 40px; /* Altura dos ícones */
+      filter: brightness(0) invert(1); /* Inverte as cores para branco se necessário */
+    }
+
+    .product-card {
+      margin-bottom: 20px; /* Espaçamento inferior entre os cards */
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <!-- Ícone à esquerda -->
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 76 23" width="76" height="23" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="#fff" x="0" y="4" opacity="100%">
+          <path d="M256 224c-79.37 0-191.1 122.7-191.1 200.2C64.02 459.1 90.76 480 135.8 480C184.6 480 216.9 454.9 256 454.9C295.5 454.9 327.9 480 376.2 480c44.1 0 71.74-20.88 71.74-55.75C447.1 346.8 335.4 224 256 224zM108.8 211.4c-10.37-34.62-42.5-57.12-71.62-50.12S-7.104 202 3.27 236.6C13.64 271.3 45.77 293.8 74.89 286.8S119.1 246 108.8 211.4zM193.5 190.6c30.87-8.125 46.37-49.1 34.5-93.37s-46.5-71.1-77.49-63.87c-30.87 8.125-46.37 49.1-34.5 93.37C127.9 170.1 162.5 198.8 193.5 190.6zM474.9 161.3c-29.12-6.1-61.25 15.5-71.62 50.12c-10.37 34.63 4.75 68.37 33.87 75.37c29.12 6.1 61.12-15.5 71.62-50.12C519.1 202 503.1 168.3 474.9 161.3zM318.5 190.6c30.1 8.125 65.62-20.5 77.49-63.87c11.87-43.37-3.625-85.25-34.5-93.37c-30.1-8.125-65.62 20.5-77.49 63.87C272.1 140.6 287.6 182.5 318.5 190.6z"></path>
+        </svg>
+        <g opacity="100%">
+          <text x="24" y="17" font-family="Source Sans Pro" font-size="18" fill="#fff" letter-spacing="0" font-weight="700" font-style="normal">PetPal</text>
+        </g>
+        <defs>
+          <filter id="filter_dshadow_0_0_0_00000014" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="bg-fix"></feFlood>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"></feColorMatrix>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feGaussianBlur stdDeviation="0"></feGaussianBlur>
+            <feComposite in2="alpha" operator="out"></feComposite>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"></feColorMatrix>
+            <feBlend mode="normal" in2="bg-fix" result="bg-fix-filter_dshadow_0_0_0_00000014"></feBlend>
+            <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_0_0_0_00000014" result="shape"></feBlend>
+          </filter>
+          <style id="google">@import url(https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&amp;display=swap);</style>
+          <style id="brand"></style>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Input e botão ao centro -->
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Busque por produtos ou serviços">
+      <button class="btn btn-outline-secondary" type="button">Buscar</button>
+    </div>
+
+    <!-- Avatar à direita -->
+    <div style="padding: 20px; width: 40px; height: 40px; border-radius: 20px; background-color: #fb212c; display: flex; align-items: center; justify-content: center;" >
+      <p style="font-size: 14px; color: white;">
+        User
+      </p>
+    </div>
+  </header>
+
+  <!-- Cards de Produtos -->
+  <div class="container mt-5 d-flex">
+    <div class="row">
+      <div class="col-md-3 product-card">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+          <div class="card-body">
+            <h5 class="card-title">Produto 1</h5>
+            <p class="card-text">Descrição do produto 1.</p>
+            <p class="card-text"><strong>R$ 100,00</strong></p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 product-card">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 2">
+          <div class="card-body">
+            <h5 class="card-title">Produto 2</h5>
+            <p class="card-text">Descrição do produto 2.</p>
+            <p class="card-text"><strong>R$ 200,00</strong></p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 product-card">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 3">
+          <div class="card-body">
+            <h5 class="card-title">Produto 3</h5>
+            <p class="card-text">Descrição do produto 3.</p>
+            <p class="card-text"><strong>R$ 300,00</strong></p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 product-card">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
+          <div class="card-body">
+            <h5 class="card-title">Produto 4</h5>
+            <p class="card-text">Descrição do produto 4.</p>
+            <p class="card-text"><strong>R$ 400,00</strong></p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer d-flex justify-content-center align-items-center">
+    <a href="#" class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27 32" width="27" height="32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" height="27" width="27" viewBox="0 0 24 24" fill="#fff" x="0" y="2.5" opacity="100%">
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+        </svg>
+        <defs>
+          <filter id="filter_dshadow_0_0_0_00000014" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="bg-fix"></feFlood>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"></feColorMatrix>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feGaussianBlur stdDeviation="0"></feGaussianBlur>
+            <feComposite in2="alpha" operator="out"></feComposite>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"></feColorMatrix>
+            <feBlend mode="normal" in2="bg-fix" result="bg-fix-filter_dshadow_0_0_0_00000014"></feBlend>
+            <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_0_0_0_00000014" result="shape"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </a>
+    <a href="#" class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 32" width="24" height="32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="#fff" x="0" y="4" opacity="100%">
+          <path d="M256 224c-79.37 0-191.1 122.7-191.1 200.2C64.02 459.1 90.76 480 135.8 480C184.6 480 216.9 454.9 256 454.9C295.5 454.9 327.9 480 376.2 480c44.1 0 71.74-20.88 71.74-55.75C447.1 346.8 335.4 224 256 224zM108.8 211.4c-10.37-34.62-42.5-57.12-71.62-50.12S-7.104 202 3.27 236.6C13.64 271.3 45.77 293.8 74.89 286.8S119.1 246 108.8 211.4zM193.5 190.6c30.87-8.125 46.37-49.1 34.5-93.37s-46.5-71.1-77.49-63.87c-30.87 8.125-46.37 49.1-34.5 93.37C127.9 170.1 162.5 198.8 193.5 190.6zM474.9 161.3c-29.12-6.1-61.25 15.5-71.62 50.12c-10.37 34.63 4.75 68.37 33.87 75.37c29.12 6.1 61.12-15.5 71.62-50.12C519.1 202 503.1 168.3 474.9 161.3zM318.5 190.6c30.1 8.125 65.62-20.5 77.49-63.87c11.87-43.37-3.625-85.25-34.5-93.37c-30.1-8.125-65.62 20.5-77.49 63.87C272.1 140.6 287.6 182.5 318.5 190.6z"></path>
+        </svg>
+        <defs>
+          <filter id="filter_dshadow_0_0_0_00000014" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="bg-fix"></feFlood>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"></feColorMatrix>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feGaussianBlur stdDeviation="0"></feGaussianBlur>
+            <feComposite in2="alpha" operator="out"></feComposite>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"></feColorMatrix>
+            <feBlend mode="normal" in2="bg-fix" result="bg-fix-filter_dshadow_0_0_0_00000014"></feBlend>
+            <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_0_0_0_00000014" result="shape"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </a>
+    <a href="#" class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27 32" width="27" height="32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="27" height="27" fill="#fff" x="0" y="2.5" opacity="100%">
+          <path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"></path>
+        </svg>
+        <defs>
+          <filter id="filter_dshadow_0_0_0_00000014" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="bg-fix"></feFlood>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"></feColorMatrix>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feGaussianBlur stdDeviation="0"></feGaussianBlur>
+            <feComposite in2="alpha" operator="out"></feComposite>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"></feColorMatrix>
+            <feBlend mode="normal" in2="bg-fix" result="bg-fix-filter_dshadow_0_0_0_00000014"></feBlend>
+            <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_0_0_0_00000014" result="shape"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </a>
+    <a href="#" class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 21 32" width="21" height="32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="21" height="21" fill="#fff" x="0" y="5.5" opacity="100%">
+          <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path>
+        </svg>
+        <defs>
+          <filter id="filter_dshadow_0_0_0_00000014" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="bg-fix"></feFlood>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"></feColorMatrix>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feGaussianBlur stdDeviation="0"></feGaussianBlur>
+            <feComposite in2="alpha" operator="out"></feComposite>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"></feColorMatrix>
+            <feBlend mode="normal" in2="bg-fix" result="bg-fix-filter_dshadow_0_0_0_00000014"></feBlend>
+            <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_0_0_0_00000014" result="shape"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
